@@ -1,0 +1,18 @@
+.samePaper {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    background: #363666;
+}
+
+.barDiv {
+    display: flex;
+    gap: 5px;
+    background: #fff;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
