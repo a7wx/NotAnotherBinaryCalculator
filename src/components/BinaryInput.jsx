@@ -7,33 +7,29 @@ const BinaryInput = ({ index, totalDigits, focusNextDigit, setDecimalValue, deci
 
     const handleChange = (event) => {
         const inputValue = event.target.value;
-        if (inputValue[1] === "0" && value !== "0") {
+
+        if (inputValue[1] === "0") {
+            if (value !== "0") {
+                setDecimalValue(decimalValue - 2 ** index)
+            }
             setValue("0")
-            setDecimalValue(decimalValue - 2 ** index)
             focusNextDigit(index);
-        } else {
-            setValue("0")
-            focusNextDigit(index);
-        }
-        if (inputValue[1] === "1" && value !== "1") {
-            setValue("1")
-            setDecimalValue(decimalValue + 2 ** index)
-            focusNextDigit(index);
-        } else {
+        } else if (inputValue[1] === "1") {
+            if (value !== "1") {
+                setDecimalValue(decimalValue + 2 ** index)
+            }
             setValue("1")
             focusNextDigit(index);
-        }
-        if (inputValue === "") {
+        } else if (inputValue === "") {
             if (value === "1") {
                 setValue("0")
                 setDecimalValue(decimalValue - 2 ** index)
-                focusNextDigit(index);
             } else {
                 setValue("1")
                 setDecimalValue(decimalValue + 2 ** index)
-                focusNextDigit(index);
             }
-        };
+            focusNextDigit(index)
+        }
     }
 
     return (
