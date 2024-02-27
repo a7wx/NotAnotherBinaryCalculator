@@ -11,8 +11,14 @@
     background: #fff;
 }
 
-.buttonGroup {
+.inputGroup {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.mainBar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }

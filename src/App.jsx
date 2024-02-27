@@ -3,14 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import BinaryInputBar from './components/BinaryInputBar'
+import DecimalInput from './components/DecimalInput'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [decimalValue, setDecimalValue] = useState(0)
 
   return (
-    <>
-      <BinaryInputBar totalDigits={4}/>
-    </>
+    <div className='mainBar'>
+      <BinaryInputBar totalDigits={8} setDecimalValue={setDecimalValue} decimalValue={decimalValue}/>
+      <label>=</label>
+      <DecimalInput setDecimalValue={setDecimalValue} decimalValue={decimalValue}/> 
+    </div>
   )
 }
 
