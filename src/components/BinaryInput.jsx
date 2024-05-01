@@ -1,7 +1,7 @@
 import { Typography, Input } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
 
-const BinaryInput = ({ index, focusNextDigit, setDecimalValue, decimalValue }) => {
+const BinaryInput = ({ index, focusNextDigit, setDecimalValue, decimalValue, rowName }) => {
     const [value, setValue] = useState('0');
     const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef(null);
@@ -57,7 +57,7 @@ const BinaryInput = ({ index, focusNextDigit, setDecimalValue, decimalValue }) =
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 ref={inputRef}
-                id={String(index)}
+                id={rowName + String(index)}
                 inputProps={{
                     style: {
                         textAlign: "center",
