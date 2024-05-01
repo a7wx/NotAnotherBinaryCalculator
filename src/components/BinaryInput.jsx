@@ -1,40 +1,61 @@
-import { Typography, Input } from "@mui/material"
-import React, { useState, useRef } from "react";
+import { Typography, Input } from "@mui/material";
+import React, { useState, useRef, useEffect } from "react";
 
-const BinaryInput = ({ index, totalDigits, focusNextDigit, setDecimalValue, decimalValue }) => {
+const BinaryInput = ({ index, focusNextDigit, setDecimalValue, decimalValue }) => {
     const [value, setValue] = useState('0');
+    const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef(null);
 
-    const handleChange = (event) => {
-        const inputValue = event.target.value;
+    useEffect(() => {
+        const binaryString = decimalToBinary(decimalValue)
 
-        if (inputValue[1] === "0") {
-            if (value !== "0") {
-                setDecimalValue(decimalValue - 2 ** index)
-            }
-            setValue("0")
-            focusNextDigit(index);
-        } else if (inputValue[1] === "1") {
-            if (value !== "1") {
-                setDecimalValue(decimalValue + 2 ** index)
-            }
-            setValue("1")
-            focusNextDigit(index);
-        } else if (inputValue === "") {
-            if (value === "1") {
-                setValue("0")
-                setDecimalValue(decimalValue - 2 ** index)
-            } else {
-                setValue("1")
-                setDecimalValue(decimalValue + 2 ** index)
-            }
-            focusNextDigit(index)
+        if(binaryString[(index - 7) * -1] != value){
+            setValue(binaryString[(index - 7) * -1])
         }
+    }), [decimalValue];
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === '0' || event.key === 'Backspace') {
+                if (value === '1') {
+                    setDecimalValue(parseInt(decimalValue, 10) - 2 ** index);
+                    setValue('0');
+                }
+                focusNextDigit(index);
+            } else if (event.key === '1') {
+                if (value === '0') {
+                    setDecimalValue(parseInt(decimalValue, 10) + 2 ** index);
+                    setValue('1');
+                }
+                focusNextDigit(index);
+            }
+            // else if (event.key === 'Space') {
+            //     focusNextDigit(index)
+            // } else {
+            // }
+        };
+
+        if (isFocused) {
+            window.addEventListener('keydown', handleKeyPress);
+        } else {
+            window.removeEventListener('keydown', handleKeyPress);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [isFocused]);
+
+    const decimalToBinary = (decimal) => {
+        const intValue = parseInt(decimal, 10);
+        return intValue.toString(2).padStart(8, '0');
     }
 
     return (
         <div className="inputGroup">
             <Input
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 ref={inputRef}
                 id={String(index)}
                 inputProps={{
@@ -53,16 +74,15 @@ const BinaryInput = ({ index, totalDigits, focusNextDigit, setDecimalValue, deci
                     fontSize: '30px' // Adjust the font size as needed
                 }}
                 value={value}
-                onChange={handleChange}
+                readOnly={true} // Disable typing directly into the input
             />
             <Typography variant="caption" sx={{
                 margin: 'auto'
             }}>
                 {2 ** index}
             </Typography>
-
         </div>
-    )
-}
+    );
+};
 
-export default BinaryInput
+export default BinaryInput;

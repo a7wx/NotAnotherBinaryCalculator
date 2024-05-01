@@ -6,7 +6,7 @@ import './components.css'
 
 const BinaryInputBar = ({ totalDigits, setDecimalValue, decimalValue }) => {
     const focusNextDigit = (index) => {
-        if (index === 0){
+        if (index === 0) {
             //Swap to beginning of binary input
             document.getElementById(String(totalDigits - 1)).focus();
         } else {
