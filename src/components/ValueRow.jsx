@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BinaryInputBar from './BinaryInputBar'
 import DecimalInput from './DecimalInput'
 
-function ValueRow({ rowDecimalValue, rowName}) {
+function ValueRow({ rowDecimalValue, rowName, updateDecimalValue}) {
   const [decimalValue, setDecimalValue] = useState(rowDecimalValue)
-  console.log(rowName)
+
+  useEffect(() => {
+    updateDecimalValue(rowName, decimalValue)
+  }, [decimalValue])
+
   return (
     <>
     <div className='mainBar'>
