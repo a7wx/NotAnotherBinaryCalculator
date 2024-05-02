@@ -1,8 +1,9 @@
-# React + Vite
+# Not Another Binary Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app was done as a service learning project for CPTE 100.
 
-Currently, two official plugins are available:
+It's purpose is to act as an educational tool providing a quick and intuitive converter between binary and decimal values.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Currently this app supports conversion between binary and decimal with up too 8-bits of binary.  It also supports the addition and subtraction of two binary numbers
+
+This project was made with React and uses Material UI for several components
